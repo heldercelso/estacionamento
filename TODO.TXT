@@ -1,0 +1,12 @@
+- deixar um campo opcional para marcar modelo do carro - talvez um campo de OBS que possa ser anotado qlq coisa
+- definir se o cliente é mensalista e qual modelo do carro
+- fazer relatorio do arrecadado passando um intervalo de datas ou selecionando o mes e o ano
+- fazer busca ou colocar botao para mostrar apenas os carros do patio e poder imprimir
+- fazer software de caixa
+- mudar banco de dados para algo mais fechado (talvez nao precisa)
+
+dúvidas
+- ver como os mensalistas sao cobrados e como é definido o dia e o preço
+- ver se é possivel usar impressora serial em notebook com usb
+- ver se ha necessidade de atalhos
+- ver quantos carros cabem no total para usar no limite de resultados

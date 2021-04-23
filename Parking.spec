@@ -3,8 +3,8 @@ from kivy_deps import sdl2, glew
 block_cipher = None
 
 
-a = Analysis(['Parking.py'],
-             pathex=['C:\\Users\\Celso\\Desktop\\python\\estacionamento'],
+a = Analysis(['projeto\\Parking.py'],
+             pathex=['projeto\\'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -26,13 +26,14 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False, icon=('parkingapp.ico'))
-coll = COLLECT(exe, Tree('.'),
+          console=False,
+          icon='parkingapp.ico')
+
+coll = COLLECT(exe, Tree('projeto\\'),
                a.binaries,
                a.zipfiles,
                a.datas,
                *[Tree(p) for p in (sdl2.dep_bins + glew.dep_bins)],
                strip=False,
                upx=True,
-               upx_exclude=[],
                name='Parking')
