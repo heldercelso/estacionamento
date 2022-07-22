@@ -160,7 +160,7 @@ class UI(BoxLayout):
                             break
         except Exception as e:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.1')
             popup_error = Popup(title='Erro',
                                 content=msg,
                                 size_hint=(0.5, 0.25))
@@ -293,14 +293,17 @@ class UI(BoxLayout):
 
         popup.open()
 
-    def adicionar_usuario(self, placa=''):
-        content = NovoUser(user_placas='', data_cadastro=str('Data de cadastro: '+datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
+    def adicionar_usuario(self, placas=None):
+        content = NovoUser(data_cadastro=str('Data de cadastro: '+datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
         content.user_nome.focus = True
         content.user_nome.text = ''
         content.user_doc.text = ''
-        content.ids.user_placas.text = placa
+        if placas:
+            content.user_placas.text = placas
+        else:
+            content.user_placas.text = ''
 
-        popup = Popup(title='Novo Cliente', content=content, 
+        popup = Popup(title='Novo Cliente', content=content,
                       size=(600,275), size_hint=(None, None))
 
         content.add_user.on_release=partial(content.adicionar, popup)
@@ -864,7 +867,7 @@ class UserDialog(BoxLayout):
             #MyApp.fechar_sheet_user()
         except:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.2')
             popup = Popup(title='Erro',
                           content=msg,
                           size_hint=(0.3, 0.25))
@@ -957,7 +960,7 @@ class NovoUser(BoxLayout):
             #MyApp.fechar_sheet_user()
         except:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.3')
             popup_error = Popup(title='Erro',
                                 content=msg,
                                 size_hint=(0.5, 0.25))
@@ -1052,7 +1055,7 @@ class AlocDialog(BoxLayout):
             #MyApp.fechar_sheet_aloc()
         except:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.4')
             popup = Popup(title='Erro',
                           content=msg,
                           size_hint=(0.3, 0.25))
@@ -1113,7 +1116,7 @@ class NovoAloc(BoxLayout):
             #MyApp.fechar_sheet_aloc()
         except:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.5')
             popup2 = Popup(title='Erro',
                           content=msg,
                           size_hint=(0.3, 0.25))
@@ -1203,13 +1206,13 @@ class NovoAloc2(BoxLayout):
                 #print(data)
                 self.cadastrar.text = 'Editar'
                 self.cadastrar.on_release = partial(MyApp.show_user, data, None)
+                self.criar_aloc.disabled = False
             else:
                 self.nao_cadastrado.text = 'Não cadastrado.'
                 self.cadastrar.text = 'Cadastrar'
                 self.cadastrar.on_release = partial(MyApp.adicionar_usuario, self.ids.user_placas.text)
+                self.criar_aloc.disabled = False
 
-        self.criar_aloc.disabled = False
-        
         self.label_ver_dados.color = (0,1,0,1)
         self.label_ver_dados.text = 'Valores válidos!'
 
@@ -1251,9 +1254,9 @@ class NovoAloc2(BoxLayout):
                           size_hint=(0.5, 0.5))
                 popup2.open()
             #MyApp.fechar_sheet_aloc()
-        except:
+        except Exception as e:
             traceback.print_exc(file=sys.stdout)
-            msg = Label(text='Se estiver com a planilha aberta, feche e tente novamente.')
+            msg = Label(text='Impressora não localizada!')
             popup2 = Popup(title='Erro',
                           content=msg,
                           size_hint=(0.3, 0.25))
@@ -1261,27 +1264,30 @@ class NovoAloc2(BoxLayout):
         popup.dismiss()
 
     def imprimir_ticket(self, num, nome, doc, placa):
-        filename = tempfile.mktemp (".txt")
-        pplacas = "\nPlaca: "+placa if placa else ""
-        pnome = "\nNome: "+nome if nome else ""
-        pdoc = "\nDoc: "+doc if doc else ""
-        Ticket = "Ticket: " + str(num) + \
-                 "\nEntrada: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + \
-                 pplacas + pnome + pdoc
-        open (filename, "w").write (Ticket)
-        hinstance = win32api.ShellExecute (
-          0,
-          "print",
-          filename,
-          #
-          # If this is None, the default printer will
-          # be used anyway.
-          #
-          '/d:"%s"' % win32print.GetDefaultPrinter (),
-          ".",
-          0
-        )
-        return True if hinstance > 32 else False
+        try:
+            filename = tempfile.mktemp (".txt")
+            pplacas = "\nPlaca: "+placa if placa else ""
+            pnome = "\nNome: "+nome if nome else ""
+            pdoc = "\nDoc: "+doc if doc else ""
+            Ticket = "Ticket: " + str(num) + \
+                     "\nEntrada: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + \
+                     pplacas + pnome + pdoc
+            open (filename, "w").write (Ticket)
+            hinstance = win32api.ShellExecute (
+              0,
+              "print",
+              filename,
+              #
+              # If this is None, the default printer will
+              # be used anyway.
+              #
+              '/d:"%s"' % win32print.GetDefaultPrinter (),
+              ".",
+              0
+            )
+            return True if hinstance > 32 else False
+        except Exception as e:
+            return False
 
 class Parking(App):
     def build(self):

@@ -7,6 +7,7 @@ kivy-deps.glew==0.1.12
 kivy-deps.sdl2==0.1.23
 Kivy-Garden==0.1.4
 openpyxl==3.0.7
+pyenchant==3.2.2
 Pygments==2.5.2
 PyInstaller==3.6
 pypiwin32==223

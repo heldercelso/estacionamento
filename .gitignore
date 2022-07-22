@@ -1,0 +1,5 @@
+dist
+build
+kivy_venv
+config.ini
+__pycache__
