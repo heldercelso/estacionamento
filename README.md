@@ -27,17 +27,19 @@ Imagens: https://helder-portfolio.herokuapp.com/parking-software-3/
 
     1.2. Se dejesar criar somente os arquivos do Pyinstaller (pasta dist) execute `gen_exe.bat` (ainda não é o .exe único).
 
-        Etapas: Ativa a virtualenv, executa o Pyinstaller e deleta arquivos desnecessarios dentro do dist
+        Etapas: Ativa a virtualenv, executa o Pyinstaller e deleta arquivos desnecessarios dentro do dist.
 
-OBS: Para abrir terminal com virtualenv já ativo use `projeto/debug.bat`
+OBS: Para abrir o terminal com virtualenv já ativo use `projeto/debug.bat`
 
 2. Para executar o software:
 
-    - Rodar programa sem executável:
-    Duplo clique no `projeto/Parking.vbs` ou abrir `debug.bat` e digitar `python Parking.py`.
+    - Sem executável:
+    
+        Duplo clique no `projeto/Parking.vbs` ou abrir `debug.bat` e digitar `python Parking.py`.
 
-    - Rodar programa com executável:
-    Duplo clique em `dist/Parking/Parking.exe`
+    - Com executável:
+    
+        Duplo clique em `dist/Parking/Parking.exe`
 
 3. Para gerar instalador único (.exe):
 
@@ -60,7 +62,7 @@ OBS: Para abrir terminal com virtualenv já ativo use `projeto/debug.bat`
 
     2. Instalar libs com o comando `pip install -r requirements.txt`.
 
-* Modos de executar o programa (com virtualenv ativo):
+* Modos de executar o programa:
 
     1. Abra o terminal (`debug.bat`) e execute o comando `python Parking.py`;
 
@@ -79,19 +81,16 @@ Se já tiver o `Parking.spec` pular para `etapa 4`.
 
 1. Dentro da pasta estacionamento execute o comando para gerar o `.spec` (com virtualenv ativo):
 
-    ``` shell
-    $ python -m PyInstaller --icon parkingapp.ico projeto\\Parking.py
-    ```
+    `$ python -m PyInstaller --icon parkingapp.ico projeto\\Parking.py`
 
 2. Abra o `Parking.spec` criado e edite:
 
     2.1. Adicione no topo:
 
-        `from kivy_deps import sdl2, glew`
+        from kivy_deps import sdl2, glew
 
     2.2. Edite a variável `coll`:
 
-        ```
         coll = COLLECT(exe, Tree('projeto\\'),
                        a.binaries,
                        a.zipfiles,
@@ -100,7 +99,6 @@ Se já tiver o `Parking.spec` pular para `etapa 4`.
                        strip=False,
                        upx=True,
                        name='Parking')
-        ```
 
     2.3. Na variável `exe=...`, mude o `debug` para `False` (caso apresente alguma falha volte para True para verificar)
 
@@ -109,13 +107,11 @@ Se já tiver o `Parking.spec` pular para `etapa 4`.
 
 3. Execute o arquivo `gen_exe.bat` (esse script ativa a virtualenv, executa o spec e por último deleta arquivos desnecessários)
 
-    -> Se desejar executar apenas o spec:
+    3.1 Se desejar executar apenas o spec:
 
-        ``` shell
         $ python -m PyInstaller Parking.spec)
-        ```
 
-5. O `.exe` é gerado em `dist/Parking/Parking.exe`
+4. O `.exe` é gerado em `dist/Parking/Parking.exe`
 
 
 # Criando o instalador
