@@ -25,7 +25,7 @@ Imagens: https://helder-portfolio.herokuapp.com/parking-software-3/
 
         Etapas: Cria a pasta `kivy_venv` e instala o `requirements.txt`.
 
-    1.2. Se dejesar criar somente os arquivos do Pyinstaller (pasta dist) execute `gen_exe.bat` (ainda não é o .exe único).
+    1.2. Se dejesar criar somente os arquivos do Pyinstaller (pasta dist) execute `gen_exe.bat` (ainda não é o `.exe` único).
 
         Etapas: Ativa a virtualenv, executa o Pyinstaller e deleta arquivos desnecessarios dentro do dist.
 
@@ -41,7 +41,7 @@ OBS: Para abrir o terminal com virtualenv já ativo use `projeto/debug.bat`
     
         Duplo clique em `dist/Parking/Parking.exe`
 
-3. Para gerar instalador único (.exe):
+3. Para gerar instalador único (`.exe`):
 
     * Baixe e instale o `Inno Setup Compiler`;
     * Execute o arquivo `estacionamento/parkinginno.iss`;
@@ -118,5 +118,5 @@ Se já tiver o `Parking.spec` pular para `etapa 4`.
 
 1. Baixe e instale o `Inno Setup Compiler`;
 2. Gere o executável seguindo as etapas anteriores (PyInstaller);
-3. Abra o arquivo parkinginno.iss, verifique o path para o Parking e compile;
+3. Abra o arquivo `parkinginno.iss`, verifique o path para o Parking e compile;
 4. A saída geralmente fica em `Output/parking.exe`.
