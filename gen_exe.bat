@@ -1,0 +1,1 @@
+.\projeto\kivy_venv\Scripts\activate.bat & python -m PyInstaller Parking.spec & del .\dist\Parking\debug.bat & del .\dist\Parking\gen_venv.bat & del .\dist\Parking\independent.py & del .\dist\Parking\Parking.py & del .\dist\Parking\Parking.vbs & del .\dist\Parking\requirements.txt
